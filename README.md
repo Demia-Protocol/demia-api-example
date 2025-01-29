@@ -2,11 +2,6 @@
 
 This directory contains scripts to test various functionalities of the Demia API. The main script, `testAll.js`, simulates the full testing flow by making a series of API calls.
 
-### Prerequisites
-If you are running the api container locally, you will need to ensure you have the necessary environment variables 
-set up the `.env` file in the root directory of the project. Refer to the main [README.md](../README.md) for details on the required environment variables.
-
-
 ### Configuration
 
 The `constants.js` file contains base information required for running the example scripts. 
