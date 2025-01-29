@@ -1,0 +1,6 @@
+./node_modules
+
+.env
+annotator:*
+stronghold:*
+streams_*

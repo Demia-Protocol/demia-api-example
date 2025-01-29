@@ -1,0 +1,51 @@
+const axios = require('axios');
+const { baseUrl, site_id, registry_params, link_params } = require('./constants');
+
+const guardianRegistration = async (token, siteId) => {
+    const linkParams = {
+        login: link_params
+    }
+
+    const registryParams = {
+        site_id: siteId,
+        registry_params,
+    };
+    console.log("Guardian registration params: ", registryParams);
+    try {
+        const link_response = await axios.post(`${baseUrl}/api/auth/guardian/link`, linkParams, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        console.log("Guardian linking response: ", link_response.data);
+
+        const response = await axios.post(`${baseUrl}/api/auth/guardian/register`, registryParams, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        console.log("Guardian registration response: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Guardian registration post failed:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+};
+
+const guardianRemoval = async (token, siteId) => {
+
+    try {
+        const response = await axios.get(`${baseUrl}/api/auth/${site_id}/guardian/remove`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        console.log("Guardian removal response: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Guardian removal post failed:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+};
+
+module.exports = {guardianRegistration, guardianRemoval};
